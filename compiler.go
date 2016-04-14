@@ -360,7 +360,7 @@ func tokenizer(input string) []token {
 	// A `current` variable for tracking our position in the code like a cursor.
 	current := 0
 
-	// And a slice of our `token` type for appending tokens to. 
+	// And a slice of our `token` type for appending tokens to.
 	tokens := []token{}
 
 	// We start by creating a `for` loop where we are setting up our `current`
@@ -496,7 +496,6 @@ func match(pattern, char string) bool {
 	return m
 }
 
-
 /**
  * ============================================================================
  *                                 ヽ/❀o ل͜ o\ﾉ
@@ -585,10 +584,10 @@ func walk() node {
 	// Inside the walk function we start by grabbing the `current` token.
 	token := pt[pc]
 
-    // We're going to split each type of token off into a different code path,
-    // starting off with `number` tokens.
-    //
-    // We test to see if we have a `number` token.
+	// We're going to split each type of token off into a different code path,
+	// starting off with `number` tokens.
+	//
+	// We test to see if we have a `number` token.
 	if token.kind == "number" {
 
 		// If we have one, we'll increment `current`.
@@ -602,8 +601,8 @@ func walk() node {
 		}
 	}
 
-    // Next we're going to look for CallExpressions. We start this off when we
-    // encounter an open parenthesis.
+	// Next we're going to look for CallExpressions. We start this off when we
+	// encounter an open parenthesis.
 	if token.kind == "paren" && token.value == "(" {
 
 		// We'll increment `current` to skip the parenthesis since we don't care
@@ -673,12 +672,11 @@ func walk() node {
 		return n
 	}
 
-    // Again, if we haven't recognized the token type by now we're going to
-    // throw an error.
+	// Again, if we haven't recognized the token type by now we're going to
+	// throw an error.
 	log.Fatal(token.kind)
 	return node{}
 }
-
 
 /**
  * ============================================================================
@@ -712,7 +710,7 @@ func walk() node {
 //
 // e.g.
 // "NumberLiteral" : func(n *node, p node) {
-//     // do something 
+//     // do something
 // }
 //
 type visitor map[string]func(n *node, p node)
@@ -738,8 +736,8 @@ func traverseArray(a []node, p node, v visitor) {
 // pass both to our visitor methods.
 func traverseNode(n, p node, v visitor) {
 
-    // We start by testing for the existence of a method on the visitor with a
-    // matching `type` and then calling it with the `node` and its `parent`.
+	// We start by testing for the existence of a method on the visitor with a
+	// matching `type` and then calling it with the `node` and its `parent`.
 	for k, va := range v {
 		if k == n.kind {
 			va(&n, p)
@@ -920,8 +918,8 @@ func codeGenerator(n node) string {
 	// We'll break things down by the `type` of the `node`.
 	switch n.kind {
 
-    // If we have a `Program` node. We will map through each node in the `body`
-    // and run them through the code generator and join them with a newline.
+	// If we have a `Program` node. We will map through each node in the `body`
+	// and run them through the code generator and join them with a newline.
 	case "Program":
 		var r []string
 		for _, no := range n.body {
@@ -929,11 +927,10 @@ func codeGenerator(n node) string {
 		}
 		return strings.Join(r, "\n")
 
-    // For `ExpressionStatements` we'll call the code generator on the nested
-    // expression and we'll add a semicolon...
+		// For `ExpressionStatements` we'll call the code generator on the nested
+		// expression and we'll add a semicolon...
 	case "ExpressionStatement":
 		return codeGenerator(*n.expression) + ";"
-
 
 	// For `CallExpressions` we will print the `callee`, add an open
 	// parenthesis, we'll map through each node in the `arguments` array and run
@@ -984,9 +981,9 @@ func codeGenerator(n node) string {
 
 func compiler(input string) string {
 	tokens := tokenizer(input)
-	ast    := parser(tokens)
-	nast   := transformer(ast)
-	out    := codeGenerator(node(nast))
+	ast := parser(tokens)
+	nast := transformer(ast)
+	out := codeGenerator(node(nast))
 
 	// and simply return the output!
 	return out
