@@ -26,8 +26,16 @@ You can find the input towards the bottom of compiler.go.
 $ go test
 ```
 
+### Contributing
+
+Feel free to issue a pull request if you feel there is something you could or
+would like to add to this project.
+
+If you like this, feel free to [follow me on Twitter][2].
+
 ---
 
 [![cc-by-4.0](https://licensebuttons.net/l/by/4.0/80x15.png)](http://creativecommons.org/licenses/by/4.0/)
 
 [1]: https://github.com/thejameskyle/the-super-tiny-compiler
+[2]: https://twitter.com/harry4_
