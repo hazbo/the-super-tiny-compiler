@@ -20,6 +20,12 @@ Output: `add(2, subtract(10, 5));`
 
 You can find the input towards the bottom of compiler.go.
 
+### Tests
+
+```
+$ go test
+```
+
 ---
 
 [![cc-by-4.0](https://licensebuttons.net/l/by/4.0/80x15.png)](http://creativecommons.org/licenses/by/4.0/)
