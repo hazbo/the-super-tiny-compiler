@@ -1,9 +1,10 @@
-# The Super Tiny Compiler
+<a href="compiler.go"><img width="731" alt="THE SUPER TINY COMPILER" src="https://cloud.githubusercontent.com/assets/952783/14413766/134c4068-ff39-11e5-996e-9452973299c2.png"/></a>
 
 You may have recently come across [The Super Tiny Compiler][1] project. I read
 the code a handful of times back-to-back and decided to see if I could write a
 compiler myself, in Go. This project essentially just a port of the original
-one, which is written in JavaScript. With comments, it's around 1000 lines.
+one, which is written in JavaScript. With comments, it's around 1000 lines -
+without, only around 250.
 
 ### Usage
 
