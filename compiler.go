@@ -413,7 +413,7 @@ func tokenizer(input string) []token {
 		//
 		// So here we're just going to test for existence and if it does exist we're
 		// going to just `continue` on.
-		if match(" ", char) == true {
+		if match(" ", char) {
 			current++
 			continue
 		}
@@ -427,7 +427,7 @@ func tokenizer(input string) []token {
 		//        Only two separate tokens
 		//
 		// So we start this off when we encounter the first number in a sequence.
-		if match("[0-9]", char) == true {
+		if match("[0-9]", char) {
 
 			// We're going to create a `value` string that we are going to append
 			// characters to.
@@ -460,7 +460,7 @@ func tokenizer(input string) []token {
 		//    ^^^
 		//    Name token
 		//
-		if match("[a-z]", char) == true {
+		if match("[a-z]", char) {
 			value := ""
 
 			// Again we're just going to loop through all the letters pushing them to
@@ -529,11 +529,6 @@ type node struct {
 	arguments  *[]node
 	context    *[]node
 }
-
-// We can define type `nodes` here, which is called an alias type. It allows us
-// to refer to a slice of nodes, `[]node` as `nodes` instead. As of writing this
-// however, I have mostly used `[]node`. You may pull request if you wish.
-type nodes []node
 
 // Type `ast` is just another alias type. I find this makes part of the code
 // more readable, as you'll come to see that there are a ton of references to
