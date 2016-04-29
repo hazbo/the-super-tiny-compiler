@@ -89,3 +89,9 @@ func TestParser(t *testing.T) {
 		t.Error("\nExpected:", testAst, "\nGot:", result)
 	}
 }
+
+func BenchmarkTokenizer(b *testing.B) {
+	for n := 0; n < b.N; n++ {
+		tokenizer(testInput)
+	}
+}
