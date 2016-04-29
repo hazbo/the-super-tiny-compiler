@@ -342,7 +342,6 @@ package main
 import (
 	"fmt"
 	"log"
-	"regexp"
 	"strings"
 )
 
@@ -413,7 +412,7 @@ func tokenizer(input string) []token {
 		//
 		// So here we're just going to test for existence and if it does exist we're
 		// going to just `continue` on.
-		if match(" ", char) {
+		if char == " " {
 			current++
 			continue
 		}
@@ -427,7 +426,7 @@ func tokenizer(input string) []token {
 		//        Only two separate tokens
 		//
 		// So we start this off when we encounter the first number in a sequence.
-		if match("[0-9]", char) {
+		if isNumber(char) {
 
 			// We're going to create a `value` string that we are going to append
 			// characters to.
@@ -436,7 +435,7 @@ func tokenizer(input string) []token {
 			// Then we're going to loop through each character in the sequence until
 			// we encounter a character that is not a number, pushing each character
 			// that is a number to our `value` and incrementing `current` as we go.
-			for match("[0-9]", char) {
+			for isNumber(char) {
 				value += char
 				current++
 				char = string([]rune(input)[current])
@@ -460,12 +459,12 @@ func tokenizer(input string) []token {
 		//    ^^^
 		//    Name token
 		//
-		if match("[a-z]", char) {
+		if isLetter(char) {
 			value := ""
 
 			// Again we're just going to loop through all the letters pushing them to
 			// a value.
-			for match("[a-z]", char) {
+			for isLetter(char) {
 				value += char
 				current++
 				char = string([]rune(input)[current])
@@ -485,15 +484,30 @@ func tokenizer(input string) []token {
 	return tokens
 }
 
-// We use match as a helper function for `regexp.MatchString` so that it becomes
-// easier to use in our loops.
-func match(pattern, char string) bool {
-	// Does the string match the pattern?
-	m, err := regexp.MatchString(pattern, char)
-	if err != nil {
-		log.Fatal(err)
+// isNumber accepts a string and will check to see whether or not what has been
+// passed through is between the range of 0 - 9.
+func isNumber(char string) bool {
+	if char == "" {
+		return false
 	}
-	return m
+	n := []rune(char)[0]
+	if n >= '0' && n <= '9' {
+		return true
+	}
+	return false
+}
+
+// isLetter works in a similar way to isNumber, but checks the range for a
+// letter in the range of a - z.
+func isLetter(char string) bool {
+	if char == "" {
+		return false
+	}
+	n := []rune(char)[0]
+	if n >= 'a' && n <= 'z' {
+		return true
+	}
+	return false
 }
 
 /**
